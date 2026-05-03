@@ -4,7 +4,7 @@
             <div class="w-2/5 flex flex-col items-center justify-center gap-4">
             <UCard variant="subtle" class="w-100">
                 <template #header>
-                    <h1 class="font-black uppercase text-2xl text-center">Change password</h1>
+                    <h1 class="font-black uppercase text-base text-center">Change password</h1>
                 </template>
     
                 <Placeholder class="flex flex-col justify-center items-center gap-2 py-4">
