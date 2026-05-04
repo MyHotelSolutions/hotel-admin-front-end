@@ -46,15 +46,35 @@
 
       <!-- sidebar footer -->
       <div class="">
-        <UButton
-          icon="i-lucide-log-out"
-          color="neutral"
-          variant="solid"
-          aria-label="Logout"
-          class="float-right"
-        >
-        Logout
-        </UButton>
+        <UModal :ui="{ overlay: 'bg-black/60', content: 'bg-white text-black' }" v-model="popup_status">
+          <UButton
+            icon="i-lucide-log-out"
+            color="neutral"
+            variant="solid"
+            class="float-right py-2 px-6"
+            @click="open_popup"
+          >
+            Logout
+          </UButton>
+
+          <template #content>
+            <div class="h-44 m-4">
+              
+              <!-- header section -->
+              <div class="">
+                <h3 class="text-lg font-black text-center uppercase">Logout</h3>
+                <p class="text-sm text-center w-[75%] mx-auto text-gray-400">This action will log you out of the system. cannot do any task on the system.</p>
+                <hr class="border-gray-200 my-4">
+              </div>
+
+              <!-- body section -->
+              <div class="flex flex-row gap-2 justify-center items-center h-[40%]">
+                <UButton variant="solid" color="neutral" class="h-fit py-2 px-6">Cancel</UButton>
+                <UButton variant="solid" color="neutral" class="h-fit py-2 px-6">Logout</UButton>
+              </div>
+            </div>
+          </template>
+        </UModal>
       </div>
     </USidebar>
 
@@ -86,6 +106,15 @@
         </Placeholder>
       </div>
     </div>
+
+    <!-- log out popup -->
+    <UModal :ui="{ overlay: 'bg-black/60', content: 'bg-white text-black' }" v-model="popup_status">
+        <template #content>
+          <div class="h-48 m-4">
+            Content here
+          </div>
+        </template>
+      </UModal>
   </div>
 </template>
 
@@ -94,6 +123,7 @@ import { link } from '#build/ui'
 
 const open = ref(true)
 const route = useRoute()
+const popup_status = ref(false);
 
 const items = [
   {
@@ -143,5 +173,9 @@ const sidebarToggle = () => {
 }
 
 const isActive = (item) => item.to === route.path
+
+const open_popup = () => {
+  popup_status.value = true;
+}
 
 </script>
