@@ -34,10 +34,10 @@
         >
         <template #link="{ items }">
           <NuxtLink
-            :to="items.to"
-            class="flex items-center gap-2 p-2"
-            :class="isActive(items) ? 'bg-gray-300 font-bold' : ''"
-          >
+          :to="items.to"
+          class="flex items-center gap-2 p-2"
+          :class="isActive(items) ? 'bg-gray-300 font-bold' : ''"
+            >
             <UIcon :name="items.icon" />
             {{ items.label }}
           </NuxtLink>
@@ -84,7 +84,7 @@
     >
       <!-- this is top bar -->
       <div
-        class="h-(--ui-header-height) shrink-0 flex items-center px-4"
+        class="h-(--ui-header-height) shrink-0 flex items-center px-4 gap-6"
         :class="[
           variant !== 'floating' && 'border-b border-default',
           side === 'right' && 'justify-end'
@@ -97,6 +97,7 @@
           aria-label="Toggle sidebar"
           @click="sidebarToggle()"
         />
+        <h3 class="font-black text-lg">{{ pageName() }} page</h3>
       </div>
 
       <!-- page container -->
@@ -119,7 +120,7 @@
 </template>
 
 <script setup>
-import { link } from '#build/ui'
+import { alert, link } from '#build/ui'
 
 const open = ref(true)
 const route = useRoute()
@@ -176,6 +177,14 @@ const isActive = (item) => item.to === route.path
 
 const open_popup = () => {
   popup_status.value = true;
+}
+
+const pageName = () => {
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].to === route.path) {
+      return items[i].label
+    }
+  }
 }
 
 </script>
